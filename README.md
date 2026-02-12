@@ -68,13 +68,13 @@ Projekt analizuje liczbę premier DLC do The Sims 4 w ujęciu miesięcznym, to j
 # Dane i częstość premier
 - Zakres danych: 2014-09 do 2026-02 (138 miesięcy).
 - Łącznie: 112 premier DLC w analizowanym okresie.
-- Średnio historycznie: ok. *0,81 DLC/miesiąc* (112 / 138).
+- Średnio historycznie: ok. *0,81 DLC/miesiąc* (112 / 138), czyli ok. *9,74 DLC/rok* (0,81 * 12).
 - Rozkład miesięczny:
   - 0 premier: 59 miesięcy
   - 1 premiera: 54 miesiące
   - 2 premiery: 19 miesięcy
   - 3 premiery: 5 miesięcy
-  - 5 premier: 1 miesiąc  
+  - 5 premier: 1 miesiąc
 Wniosek: dane są rzadkie (dużo zer) i nieregularne (czasem pojawiają się piki), co utrudnia dokładne przewidywanie na poziomie pojedynczych miesięcy, ale nie było mi to straszne.
 
 # Zmiana tempa wydawania w czasie
@@ -89,19 +89,24 @@ Liczba premier rocznie (pełne lata):
 - 2022: 11
 - 2023: 12
 - 2024: 13
-- 2025: 21  
+- 2025: 21
 (Uwaga: 2014 i 2026 są niepełnymi latami w zbiorze, bo gra wyszła w 2014 a teraz mamy początek 2026)
 
-Średnie tempo:
+Średnie tempo (rocznie):
 - 2015–2020: **~6,33 DLC/rok**
 - 2021–2024: **~12,0 DLC/rok**
+Różnica: po 2020 średnio jest **~+5,67 DLC/rok** więcej (ok. podwojenie).
 
-Wniosek: po 2020 tempo wyraźnie rośnie (ok. podwojenie), a 2025 jest dodatkowo mocnym skokiem (21 premier) (pandemia + sprzedaz EA?)
+Wzrost roczny (w prostych liczbach):
+- od 2015 do 2025: z 8 do 21 DLC/rok, czyli **+13 DLC/rok** w 10 lat (średnio ok. **+1,3 DLC/rok**).
+- tempo względne (CAGR, orientacyjnie): **~10% rocznie** (8 → 21 w latach 2015–2025).
+
+Wniosek: po 2020 tempo wyraźnie rośnie (ok. podwojenie), a 2025 jest dodatkowo mocnym skokiem (21 premier). Przyczyna może być miks: zmiana strategii wydawniczej + większa liczba mniejszych formatów dodatków (np. kits).
 
 # Prognoza na 36 miesięcy (03.2026 → 02.2029)
 Zbudowałam model SARIMA i wykonanałam prognozę na 36 miesięcy.
 - Suma w horyzoncie 36 miesięcy: **~67,12 premier DLC**
-- Średnio w prognozie: **~1,86 DLC/miesiąc**
+- Średnio w prognozie: **~1,86 DLC/miesiąc**, czyli ok. **~22,37 DLC/rok** (1,86 * 12).
 
 Agregacja roczna prognozy (suma miesięcznych prognoz):
 - 2026 (mar–gru): **~16,14**
@@ -109,7 +114,7 @@ Agregacja roczna prognozy (suma miesięcznych prognoz):
 - 2028 (pełny rok): **~24,76**
 - 2029 (sty–lut): **~4,44**
 
-Wniosek: model sugeruje utrzymanie wysokiego tempa z 2025 oraz lekką tendencję wzrostową w 2027–2028 (EA zostało sprxedane i trzeba jakoś spłacić długi)
+Wniosek: model sugeruje utrzymanie wysokiego tempa z 2025 oraz lekką tendencję wzrostową w 2027–2028.
 
 # Dlaczego przedziały ufności są duże?
 - Szereg jest zliczeniowy i nieregularny (0/1/2/3…), a do tego zawiera dużo zer oraz sporadyczne „piki”.
@@ -125,3 +130,4 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python -m notebook
+
