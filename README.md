@@ -61,9 +61,65 @@ Porównuję model SARIMA z baseline.
 - Przedziały ufności rosną wraz z horyzontem, co oznacza dużą niepewność przy prognozie 3-letniej.
 - Prognoza na 36 miesięcy jest „pokazowa” i służy spełnieniu wymagań zadania, ale realistycznie bardziej sensowny horyzont to krótszy (np. 6–12 miesięcy), bo tempo wydań zależy od decyzji biznesowych i planów wydawniczych, które mogą się zmienić.
 
+7. Wnioski z wykonanych działan
+
+Projekt analizuje liczbę premier DLC do The Sims 4 w ujęciu miesięcznym, to juz wiemy.
+
+# Dane i częstość premier
+- Zakres danych: 2014-09 do 2026-02 (138 miesięcy).
+- Łącznie: 112 premier DLC w analizowanym okresie.
+- Średnio historycznie: ok. *0,81 DLC/miesiąc* (112 / 138).
+- Rozkład miesięczny:
+  - 0 premier: 59 miesięcy
+  - 1 premiera: 54 miesiące
+  - 2 premiery: 19 miesięcy
+  - 3 premiery: 5 miesięcy
+  - 5 premier: 1 miesiąc  
+Wniosek: dane są rzadkie (dużo zer) i nieregularne (czasem pojawiają się piki), co utrudnia dokładne przewidywanie na poziomie pojedynczych miesięcy, ale nie było mi to straszne.
+
+# Zmiana tempa wydawania w czasie
+Liczba premier rocznie (pełne lata):
+- 2015: 8
+- 2016: 7
+- 2017: 7
+- 2018: 5
+- 2019: 6
+- 2020: 5
+- 2021: 12
+- 2022: 11
+- 2023: 12
+- 2024: 13
+- 2025: 21  
+(Uwaga: 2014 i 2026 są niepełnymi latami w zbiorze, bo gra wyszła w 2014 a teraz mamy początek 2026)
+
+Średnie tempo:
+- 2015–2020: **~6,33 DLC/rok**
+- 2021–2024: **~12,0 DLC/rok**
+
+Wniosek: po 2020 tempo wyraźnie rośnie (ok. podwojenie), a 2025 jest dodatkowo mocnym skokiem (21 premier) (pandemia + sprzedaz EA?)
+
+# Prognoza na 36 miesięcy (03.2026 → 02.2029)
+Zbudowałam model SARIMA i wykonanałam prognozę na 36 miesięcy.
+- Suma w horyzoncie 36 miesięcy: **~67,12 premier DLC**
+- Średnio w prognozie: **~1,86 DLC/miesiąc**
+
+Agregacja roczna prognozy (suma miesięcznych prognoz):
+- 2026 (mar–gru): **~16,14**
+- 2027 (pełny rok): **~21,78**
+- 2028 (pełny rok): **~24,76**
+- 2029 (sty–lut): **~4,44**
+
+Wniosek: model sugeruje utrzymanie wysokiego tempa z 2025 oraz lekką tendencję wzrostową w 2027–2028 (EA zostało sprxedane i trzeba jakoś spłacić długi)
+
+# Dlaczego przedziały ufności są duże?
+- Szereg jest zliczeniowy i nieregularny (0/1/2/3…), a do tego zawiera dużo zer oraz sporadyczne „piki”.
+- W danych widać zmianę tempa wydawania po 2020 (możliwa zmiana strategii wydawniczej), co zwiększa niepewność modeli opartych o historię.
+- Im dalszy horyzont prognozy (36 miesięcy), tym naturalnie szerszy przedział niepewności.
+
+Interpretacja praktyczna: prognoza ma największy sens jako przewidywanie **średniego tempa (miesięcznie/rocznie)**, a nie jako dokładne wskazanie, w którym konkretnie miesiącu wyjdzie dokładnie X dodatków.
 
 
-***Jak uruchomić projekt
+***Jak uruchomić projekt, nie ma za co***
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
