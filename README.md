@@ -17,9 +17,9 @@ Repo zawiera notebook Jupyter z analizą, wykresami, modelowaniem oraz moimi wni
 Celem projektu jest analiza i prognoza liczby dodatków (DLC/pakietów) wydawanych do gry The Sims (głównie Sims 4) w ujęciu miesięcznym. Zmienną prognozowaną jest:
 - y(t) = liczba DLC wydanych w danym miesiącu.
 
-Motywacja: rynek DLC w Sims 4 jest intensywny i budzi dyskusje w społeczności. Chcę sprawdzić, czy na podstawie historii wydań da się przewidzieć tempo publikacji w kolejnych miesiącach.
+Motywacja: rynek DLC w Sims 4 jest intensywny, kontrowwrsyjny i budzi dyskusje w społeczności. Chcę sprawdzić, czy na podstawie historii wydań da się przewidzieć tempo publikacji w kolejnych miesiącach.
 
-Horyzont prognozy: do 36 miesięcy (3 lata), z komentarzem o sensowności tak długiej prognozy.
+Horyzont prognozy: do 36 miesięcy (3 lata), niżej powiem dlaczego.
 
 2. Dane i źródło
 Dane: zestawienie DLC i pakietów z datami wydania i metadanymi.
@@ -39,7 +39,7 @@ Sprawdzam:
 Wykresy zapisane w `figures/`.
 
 4. Model i prognoza
-Model: SARIMA (sezonowy ARIMA) dopasowany do miesięcznego szeregu y(t).
+Model: SARIMA (SSSezonowy ARIMA) dopasowany do miesięcznego szeregu y(t).
 
 Podejście:
 - podział na zbiór treningowy i testowy (walidacja na końcówce szeregu),
@@ -51,14 +51,14 @@ Plik z prognozą: `data/forecast_36_months_sarima.csv`.
 
 5. Walidacja
 Metryki:
-- MAE (średni błąd bezwzględny),
-- RMSE (pierwiastek z MSE).
+- MAE (średni błąd bezwzględny)
+- RMSE (pierwiastek z MSE)
 
 Porównuję model SARIMA z baseline.
 
 6. Wnioski
 - Model lepiej przewiduje niż baseline (na zbiorze testowym).
-- Przedziały ufności rosną wraz z horyzontem, co oznacza dużą niepewność przy prognozie 3-letniej.
+- Przedziały ufności rosną wraz z horyzontem, co oznacza dużą niepewność przy prognozie 3-letniej
 - Prognoza na 36 miesięcy jest „pokazowa” i służy spełnieniu wymagań zadania, ale realistycznie bardziej sensowny horyzont to krótszy (np. 6–12 miesięcy), bo tempo wydań zależy od decyzji biznesowych i planów wydawniczych, które mogą się zmienić.
 
 7. Wnioski z wykonanych działan
@@ -98,10 +98,10 @@ Liczba premier rocznie (pełne lata):
 Różnica: po 2020 średnio jest **~+5,67 DLC/rok** więcej (ok. podwojenie).
 
 Wzrost roczny (w prostych liczbach):
-- od 2015 do 2025: z 8 do 21 DLC/rok, czyli **+13 DLC/rok** w 10 lat (średnio ok. **+1,3 DLC/rok**).
-- tempo względne (CAGR, orientacyjnie): **~10% rocznie** (8 → 21 w latach 2015–2025).
+- od 2015 do 2025: z 8 do 21 DLC/rok, czyli **+13 DLC/rok** w 10 lat (średnio ok. **+1,3 DLC/rok**, każdy Simmer to odczuł - a twórcy na YT mieli dużo pracy!).
+- tempo względne (CAGR, orientacyjnie): **~10% rocznie** (8 → 21 w latach 2015–2025)
 
-Wniosek: po 2020 tempo wyraźnie rośnie (ok. podwojenie), a 2025 jest dodatkowo mocnym skokiem (21 premier). Przyczyna może być miks: zmiana strategii wydawniczej + większa liczba mniejszych formatów dodatków (np. kits).
+Wniosek: po 2020 tempo wyraźnie rośnie ( niemalże podwojenie, niesamowite), a 2025 jest dodatkowo mocnym skokiem (21 premier). Przyczyna może być miks: zmiana strategii wydawniczej + większa liczba mniejszych formatów dodatków (np. kits) + przejęcie EA + rezygnacja z Projektu Renee (aka The Sims 5) i pełne skupienie na rozwoju The Sims 4.
 
 # Prognoza na 36 miesięcy (03.2026 → 02.2029)
 Zbudowałam model SARIMA i wykonanałam prognozę na 36 miesięcy.
@@ -117,11 +117,11 @@ Agregacja roczna prognozy (suma miesięcznych prognoz):
 Wniosek: model sugeruje utrzymanie wysokiego tempa z 2025 oraz lekką tendencję wzrostową w 2027–2028.
 
 # Dlaczego przedziały ufności są duże?
-- Szereg jest zliczeniowy i nieregularny (0/1/2/3…), a do tego zawiera dużo zer oraz sporadyczne „piki”.
-- W danych widać zmianę tempa wydawania po 2020 (możliwa zmiana strategii wydawniczej), co zwiększa niepewność modeli opartych o historię.
-- Im dalszy horyzont prognozy (36 miesięcy), tym naturalnie szerszy przedział niepewności.
+- Szereg jest zliczeniowy i nieregularny a do tego zawiera dużo zer oraz sporadyczne piki.
+- W danych widać zmianę tempa wydawania po 2020 (możliwa zmiana strategii biznesowej, na pewno - pandemia + przejęcie EA), co zwiększa niepewność modeli opartych o historię.
+- i jeszcze raz - im dalszy horyzont prognozy (36 miesięcy), tym naturalnie szerszy przedział niepewności.
 
-Interpretacja praktyczna: prognoza ma największy sens jako przewidywanie **średniego tempa (miesięcznie/rocznie)**, a nie jako dokładne wskazanie, w którym konkretnie miesiącu wyjdzie dokładnie X dodatków.
+Interpretacja praktyczna: prognoza ma największy sens jako przewidywanie **średniego tempa (miesięcznie/rocznie)**, a nie jako dokładne wskazanie, w którym konkretnie miesiącu wyjdzie dokładnie X dodatków. Ale to i tak ciekawe. 
 
 
 ***Jak uruchomić projekt, nie ma za co***
