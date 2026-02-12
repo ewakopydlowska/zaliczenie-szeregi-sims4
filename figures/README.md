@@ -1,0 +1,1 @@
+Wykresy wygenerowane w notebooku!!!
